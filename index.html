@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Tahir Bachar Issa | Assistant Professor of Data Science</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Source+Sans+3:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+/* ── Reset & vars ──────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --dk:   #1B3A4B;
+  --blue: #2980B0;
+  --teal: #1A8A7D;
+  --rust: #C4553D;
+  --gold: #B8860B;
+  --purp: #7B4F9D;
+  --bg:   #F4F6FA;
+  --bgw:  #FFFFFF;
+  --bga:  #EAF0F5;
+  --t1:   #1A2B3C;
+  --t2:   #4D6478;
+  --t3:   #8494A7;
+  --bdr:  #D5DDE8;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans: 'Source Sans 3',system-ui,sans-serif;
+  --mono: 'IBM Plex Mono',monospace;
+  --r:6px;
+  --shadow:0 4px 20px rgba(27,58,75,.10);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--sans);background:var(--bg);color:var(--t1);line-height:1.7}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%;display:block}
+
+/* ── Top Nav ───────────────────────────────────────────────────────── */
+.topnav{
+  position:sticky;top:0;z-index:200;
+  background:var(--dk);
+  padding:.55rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;
+  box-shadow:0 2px 12px rgba(0,0,0,.18);
+}
+.nav-brand{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.nav-photo{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.3)}
+.nav-name{font-family:var(--serif);font-size:1rem;color:#fff;font-weight:500;white-space:nowrap}
+.nav-name span{color:#7ecfef}
+.nav-links{display:flex;flex-wrap:wrap;gap:0;list-style:none}
+.nav-links a{
+  color:rgba(255,255,255,.78);font-size:.8rem;font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;
+  padding:.42rem .85rem;display:block;
+  transition:color .2s,background .2s;border-radius:4px;
+}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.1);text-decoration:none}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:.3rem}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;margin:4px 0;transition:.3s}
+.mob-nav{display:none;background:#15303f;padding:.5rem 2rem 1rem}
+.mob-nav.open{display:block}
+.mob-nav a{display:block;color:rgba(255,255,255,.8);padding:.5rem 0;font-size:.88rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid rgba(255,255,255,.08)}
+.mob-nav a:hover{color:#fff;text-decoration:none}
+
+/* ── Hero ──────────────────────────────────────────────────────────── */
+.hero{
+  background:var(--bgw);
+  padding:4rem 2rem 3.5rem;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-120px;right:-120px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(41,128,176,.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 360px;gap:3rem;align-items:center;
+}
+/* Name card */
+.name-card{text-align:center}
+.name-photo-wrap{
+  width:160px;height:160px;border-radius:50%;
+  overflow:hidden;margin:0 auto 1.2rem;
+  border:4px solid var(--bga);
+  box-shadow:0 8px 32px rgba(27,58,75,.18);
+}
+.name-photo-wrap img{width:100%;height:100%;object-fit:cover}
+.name-card h1{font-family:var(--serif);font-size:1.7rem;color:var(--dk);line-height:1.2;margin-bottom:.3rem}
+.name-card .nc-title{font-size:.92rem;color:var(--t2);margin-bottom:.15rem}
+.name-card .nc-dept{font-size:.85rem;color:var(--blue);font-weight:600;margin-bottom:.1rem}
+.name-card .nc-uni{font-size:.83rem;color:var(--t3);margin-bottom:.8rem}
+.social-icons{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap}
+.soc-btn{
+  display:inline-flex;align-items:center;gap:.35rem;
+  padding:.32rem .75rem;border-radius:20px;font-size:.76rem;font-weight:700;
+  border:1.5px solid;transition:background .2s,color .2s;white-space:nowrap;
+}
+.soc-btn:hover{text-decoration:none;opacity:.85}
+.soc-btn.scholar{border-color:var(--blue);color:var(--blue)}
+.soc-btn.scholar:hover{background:var(--blue);color:#fff}
+.soc-btn.email{border-color:var(--teal);color:var(--teal)}
+.soc-btn.email:hover{background:var(--teal);color:#fff}
+.soc-btn.sjsu{border-color:var(--gold);color:var(--gold)}
+.soc-btn.sjsu:hover{background:var(--gold);color:#fff}
+/* Bio side */
+.hero-bio .greeting{font-family:var(--mono);font-size:.8rem;color:var(--teal);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.6rem}
+.hero-bio h2{font-family:var(--serif);font-size:2rem;color:var(--dk);line-height:1.3;margin-bottom:1rem}
+.hero-bio h2 em{color:var(--blue);font-style:normal}
+.hero-bio p{font-size:.95rem;color:var(--t2);line-height:1.88;max-width:620px;margin-bottom:.9rem}
+.r-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.1rem 0}
+.pill{
+  display:inline-flex;align-items:center;gap:.3rem;
+  padding:.28rem .72rem;border-radius:20px;
+  font-size:.76rem;font-weight:700;letter-spacing:.02em;
+}
+.pill.math{background:#e8f4fb;color:var(--blue)}
+.pill.ml{background:#e8f8f5;color:var(--teal)}
+.pill.nlp{background:#fdf3e3;color:var(--gold)}
+.pill.cv{background:#f9ece9;color:var(--rust)}
+.pill.stats{background:#f3eef8;color:var(--purp)}
+.hero-cta{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.4rem}
+.btn-primary{
+  background:var(--dk);color:#fff;
+  padding:.6rem 1.4rem;border-radius:5px;
+  font-size:.84rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  transition:background .2s,transform .15s;
+}
+.btn-primary:hover{background:var(--blue);text-decoration:none;transform:translateY(-1px)}
+.btn-outline{
+  border:2px solid var(--dk);color:var(--dk);
+  padding:.58rem 1.3rem;border-radius:5px;
+  font-size:.84rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  transition:background .2s,color .2s,transform .15s;
+}
+.btn-outline:hover{background:var(--dk);color:#fff;text-decoration:none;transform:translateY(-1px)}
+/* Canvas */
+.hero-canvas{display:flex;align-items:center;justify-content:center}
+#neural-canvas{border-radius:12px;background:var(--bga)}
+
+/* ── Expertise Strip ───────────────────────────────────────────────── */
+.exp{background:var(--bga);padding:2.8rem 2rem;border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr)}
+.exp-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.exp-item{padding:1.2rem 1.8rem;position:relative}
+.exp-item+.exp-item::before{
+  content:'';position:absolute;left:0;top:15%;bottom:15%;
+  width:1px;background:var(--bdr);
+}
+.exp-icon{font-size:1.6rem;margin-bottom:.5rem}
+.exp-item h4{font-family:var(--serif);font-size:1rem;color:var(--dk);margin-bottom:.3rem}
+.exp-item p{font-size:.82rem;color:var(--t2);line-height:1.6}
+
+/* ── Section base ──────────────────────────────────────────────────── */
+.sec{padding:3.5rem 2rem}
+.sec-inner{max-width:1100px;margin:0 auto}
+.sec-label{font-family:var(--mono);font-size:.72rem;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem}
+.sec-title{font-family:var(--serif);font-size:1.9rem;color:var(--dk);margin-bottom:1.6rem;line-height:1.3}
+.sec-title span{color:var(--blue)}
+.sec.alt{background:var(--bga)}
+
+/* ── Highlights grid ───────────────────────────────────────────────── */
+.hi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.hi-card{
+  background:var(--bgw);border-radius:var(--r);
+  padding:1.3rem 1.4rem;
+  border:1px solid var(--bdr);
+  box-shadow:var(--shadow);
+  transition:transform .25s,box-shadow .25s;
+  display:flex;flex-direction:column;
+}
+.hi-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(27,58,75,.13)}
+.hi-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:8px;
+  font-size:1rem;margin-bottom:.8rem;flex-shrink:0;
+}
+.hi-badge.b1{background:#dff0fb;color:var(--blue)}
+.hi-badge.b2{background:#dff5f0;color:var(--teal)}
+.hi-badge.b3{background:#fdebd0;color:var(--gold)}
+.hi-badge.b4{background:#fce8e4;color:var(--rust)}
+.hi-badge.b5{background:#ede8f7;color:var(--purp)}
+.hi-badge.b6{background:#dff0fb;color:var(--blue)}
+.hi-card h4{font-family:var(--serif);font-size:.92rem;color:var(--dk);margin-bottom:.4rem;line-height:1.45}
+.hi-card p{font-size:.8rem;color:var(--t2);line-height:1.6;flex:1}
+.hi-meta{font-family:var(--mono);font-size:.7rem;color:var(--t3);margin-top:.7rem}
+.hi-link{font-size:.76rem;font-weight:700;color:var(--blue);margin-top:.5rem;display:inline-block}
+
+/* ── Full publications ─────────────────────────────────────────────── */
+.pub-year{font-family:var(--mono);font-size:.72rem;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;margin:1.6rem 0 .7rem;padding-bottom:.3rem;border-bottom:1px solid var(--bdr)}
+.pub-row{display:flex;gap:.9rem;align-items:flex-start;padding:.75rem 0;border-bottom:1px dotted var(--bdr)}
+.pub-row:last-child{border-bottom:none}
+.pub-n{
+  min-width:26px;height:26px;border-radius:50%;
+  background:var(--dk);color:#fff;
+  font-size:.7rem;font-weight:700;font-family:var(--mono);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem;
+}
+.pub-n.sub{background:var(--rust)}
+.pub-ttl{font-size:.88rem;font-weight:700;color:var(--dk);line-height:1.5}
+.pub-auth{font-size:.8rem;color:var(--t2);margin-top:.1rem}
+.pub-venue{font-size:.8rem;color:var(--t3);font-style:italic;margin-top:.05rem}
+.pub-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.35rem}
+.pub-tag{
+  font-size:.68rem;font-weight:700;font-family:var(--mono);
+  padding:.1rem .5rem;border-radius:3px;
+  border:1.5px solid;
+}
+.pub-tag.doi{border-color:var(--blue);color:var(--blue)}
+.pub-tag.doi:hover{background:var(--blue);color:#fff;text-decoration:none}
+.pub-tag.arxiv{border-color:var(--rust);color:var(--rust)}
+.pub-tag.arxiv:hover{background:var(--rust);color:#fff;text-decoration:none}
+.pub-tag.ieee{border-color:var(--teal);color:var(--teal)}
+.pub-tag.ieee:hover{background:var(--teal);color:#fff;text-decoration:none}
+.pub-tag.ams{border-color:var(--purp);color:var(--purp)}
+.pub-tag.ams:hover{background:var(--purp);color:#fff;text-decoration:none}
+.pub-tag.review{border-color:var(--gold);color:var(--gold);cursor:default}
+.prep-box{background:var(--bga);border-left:3px solid var(--gold);border-radius:0 var(--r) var(--r) 0;padding:1rem 1.2rem;margin-top:1.2rem}
+.prep-label{font-family:var(--mono);font-size:.7rem;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
+
+/* ── Timeline ──────────────────────────────────────────────────────── */
+.tl{padding-left:1.6rem;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:4px;bottom:4px;width:2px;background:var(--bdr)}
+.tl-item{position:relative;margin-bottom:1.6rem}
+.tl-dot{position:absolute;left:-1.4rem;top:.45rem;width:10px;height:10px;border-radius:50%;background:var(--blue);border:2px solid var(--bgw);box-shadow:0 0 0 2px var(--blue)}
+.tl-date{font-family:var(--mono);font-size:.72rem;color:var(--blue);font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.1rem}
+.tl-role{font-weight:700;font-size:.95rem;color:var(--dk)}
+.tl-where{font-size:.85rem;color:var(--t2);margin-bottom:.2rem}
+.tl-desc{font-size:.84rem;color:var(--t2)}
+.tl-desc em{color:var(--t3)}
+
+/* ── Students ──────────────────────────────────────────────────────── */
+.stu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.stu-card{
+  background:var(--bgw);border-radius:var(--r);
+  border:1px solid var(--bdr);padding:1rem 1.1rem;
+  border-top:3px solid var(--blue);box-shadow:var(--shadow);
+}
+.stu-card.current{border-top-color:var(--gold)}
+.stu-name{font-family:var(--serif);font-weight:700;font-size:.93rem;color:var(--dk);margin-bottom:.2rem}
+.stu-topic{font-size:.83rem;color:var(--t1);margin-bottom:.3rem;line-height:1.5}
+.stu-meta{font-size:.76rem;color:var(--t3);font-family:var(--mono)}
+
+/* ── Course table ──────────────────────────────────────────────────── */
+.ctable{width:100%;border-collapse:collapse;font-size:.875rem}
+.ctable th{text-align:left;font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);padding:.5rem .75rem;background:var(--bga);border-bottom:2px solid var(--bdr)}
+.ctable td{padding:.52rem .75rem;border-bottom:1px solid var(--bdr);vertical-align:top}
+.ctable tr:last-child td{border-bottom:none}
+.ctable tr:hover td{background:var(--bga)}
+
+/* ── Awards ────────────────────────────────────────────────────────── */
+.aw-list{list-style:none}
+.aw-item{display:flex;gap:1rem;align-items:baseline;padding:.65rem 0;border-bottom:1px solid var(--bdr);font-size:.875rem}
+.aw-item:last-child{border-bottom:none}
+.aw-yr{font-family:var(--mono);font-size:.75rem;font-weight:700;color:var(--gold);min-width:84px;white-space:nowrap}
+.aw-body strong{color:var(--dk)}
+.aw-body{color:var(--t2)}
+
+/* ── Skills pills ──────────────────────────────────────────────────── */
+.sk-row{margin-bottom:1rem}
+.sk-row h4{font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:.5rem}
+.sk-pills{display:flex;flex-wrap:wrap;gap:.38rem}
+.sk-pill{padding:.25rem .72rem;border-radius:4px;font-size:.77rem;font-weight:700}
+.sk-pill.code{background:var(--dk);color:#fff}
+.sk-pill.lang{background:var(--teal);color:#fff}
+.sk-pill.org{background:var(--purp);color:#fff}
+
+/* ── Reveal animation ──────────────────────────────────────────────── */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.rv.visible{opacity:1;transform:none}
+
+/* ── Footer ────────────────────────────────────────────────────────── */
+footer{background:var(--dk);color:rgba(255,255,255,.6);text-align:center;padding:1.5rem 1rem;font-size:.8rem}
+footer a{color:rgba(255,255,255,.8)}
+
+/* ── Responsive ────────────────────────────────────────────────────── */
+@media(max-width:1000px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-canvas{display:none}
+  .hero-bio p{max-width:100%}
+  .r-pills,.hero-cta{justify-content:center}
+  .hi-grid{grid-template-columns:repeat(2,1fr)}
+  .exp-inner{grid-template-columns:repeat(2,1fr)}
+  .exp-item+.exp-item::before{display:none}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:block}
+  .hi-grid{grid-template-columns:1fr}
+  .exp-inner{grid-template-columns:1fr}
+  .name-card{order:-1}
+}
+@media(max-width:480px){
+  .hero{padding:2.5rem 1.2rem}
+  .sec{padding:2.5rem 1.2rem}
+}
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ NAV ══════════════════════════════════════════════════ -->
+<nav class="topnav">
+  <div class="nav-brand">
+    <img class="nav-photo" src="issatahir2019b.jpg" alt="Tahir Bachar Issa"/>
+    <span class="nav-name">Tahir <span>Bachar Issa</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#highlights">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#current">Current Work</a></li>
+    <li><a href="#students">Students</a></li>
+    <li><a href="#teaching">Teaching</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMob()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mob-nav" id="mob-nav">
+  <a href="#about" onclick="toggleMob()">About</a>
+  <a href="#highlights" onclick="toggleMob()">Research</a>
+  <a href="#publications" onclick="toggleMob()">Publications</a>
+  <a href="#current" onclick="toggleMob()">Current Work</a>
+  <a href="#students" onclick="toggleMob()">Students</a>
+  <a href="#teaching" onclick="toggleMob()">Teaching</a>
+  <a href="#awards" onclick="toggleMob()">Awards</a>
+  <a href="#contact" onclick="toggleMob()">Contact</a>
+</div>
+
+<!-- ═══════════ HERO ═════════════════════════════════════════════════ -->
+<section class="hero" id="about">
+  <div class="hero-inner">
+
+    <!-- bio side -->
+    <div class="hero-bio rv">
+      <div class="greeting">Assistant Professor · Data Science</div>
+      <h2>Bridging <em>Rigorous Mathematics</em> and Applied Machine Learning</h2>
+      <p>I am an Assistant Professor of Data Science in the Department of Mathematics &amp; Statistics at <strong>San José State University</strong>. My research spans two interconnected areas: the nonlinear analysis of PDEs and chemotaxis models, and applied machine learning — including deep learning, NLP, and computer vision — with applications in biomedical imaging, climate science, and blockchain systems.</p>
+      <p>Before joining SJSU, I was a Data Science Postdoctoral Fellow at The Data Institute, University of San Francisco (2019–2021), collaborating with <strong>Harvard Center for Systems Biology</strong> and <strong>MedStar Georgetown University Hospital</strong> on GAN-based microscopy and clinical NLP pipelines. I hold a Ph.D. in Mathematics from Auburn University, advised by Prof. Wenxian Shen.</p>
+      <div class="r-pills">
+        <span class="pill math">⚗ Nonlinear PDEs</span>
+        <span class="pill ml">🧠 Deep Learning</span>
+        <span class="pill nlp">💬 NLP</span>
+        <span class="pill cv">🔬 Computer Vision</span>
+        <span class="pill stats">📊 Statistics</span>
+        <span class="pill math">🌊 Chemotaxis Models</span>
+        <span class="pill ml">🔥 Fire Weather Risk</span>
+        <span class="pill nlp">⛓ Blockchain &amp; AI</span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn-primary" href="#publications">View Publications</a>
+        <a class="btn-outline" href="#contact">Contact Me</a>
+      </div>
+    </div>
+
+    <!-- name card + canvas -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:1.5rem">
+      <div class="name-card rv" style="transition-delay:.15s">
+        <div class="name-photo-wrap">
+          <img src="issatahir2019b.jpg" alt="Tahir Bachar Issa"/>
+        </div>
+        <h1>Tahir Bachar Issa</h1>
+        <div class="nc-title">Assistant Professor of Data Science</div>
+        <div class="nc-dept">Dept. of Mathematics &amp; Statistics</div>
+        <div class="nc-uni">San José State University · San José, CA</div>
+        <div class="social-icons">
+          <a class="soc-btn scholar" href="https://scholar.google.com/citations?user=40_VxlQAAAAJ&hl=en" target="_blank">🎓 Scholar</a>
+          <a class="soc-btn email" href="mailto:tahirbachar.issa@sjsu.edu">✉ Email</a>
+          <a class="soc-btn sjsu" href="https://www.sjsu.edu/math/" target="_blank">🏛 SJSU</a>
+        </div>
+      </div>
+      <div class="hero-canvas">
+        <canvas id="neural-canvas" width="320" height="260"></canvas>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ EXPERTISE STRIP ══════════════════════════════════════ -->
+<div class="exp">
+  <div class="exp-inner">
+    <div class="exp-item rv">
+      <div class="exp-icon">🔢</div>
+      <h4>Applied Mathematics</h4>
+      <p>Nonlinear PDE analysis, chemotaxis and reaction-diffusion systems, stability theory, and mathematical biology.</p>
+    </div>
+    <div class="exp-item rv" style="transition-delay:.1s">
+      <div class="exp-icon">🤖</div>
+      <h4>Machine Learning</h4>
+      <p>Deep learning, GANs, LLM fine-tuning, activation function research, and ensemble methods for real-world deployment.</p>
+    </div>
+    <div class="exp-item rv" style="transition-delay:.2s">
+      <div class="exp-icon">🔬</div>
+      <h4>Biomedical Imaging</h4>
+      <p>Super-resolution microscopy via GANs, endothelial mitochondria segmentation, and clinical NLP for radiology.</p>
+    </div>
+    <div class="exp-item rv" style="transition-delay:.3s">
+      <div class="exp-icon">📡</div>
+      <h4>Data Science</h4>
+      <p>NLP, computer vision, extreme weather ML, blockchain analytics, and production model deployment.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ HIGHLIGHTS ════════════════════════════════════════════ -->
+<section class="sec" id="highlights">
+  <div class="sec-inner">
+    <div class="sec-label rv">Recent Work</div>
+    <h2 class="sec-title rv">Research <span>Highlights</span></h2>
+    <div class="hi-grid">
+
+      <div class="hi-card rv">
+        <div class="hi-badge b1">⚡</div>
+        <h4>SAW: High-Performing Activation Functions for Deep Learning</h4>
+        <p>Novel activation functions outperforming state-of-the-art for training deep learning models and LLMs. Submitted to CIKM 2026.</p>
+        <div class="hi-meta">S. Mohanty, T. B. Issa, M. Masum, D. Uminsky · 2026</div>
+        <span class="hi-link pub-tag review" style="margin-top:.5rem">Under Review</span>
+      </div>
+
+      <div class="hi-card rv" style="transition-delay:.08s">
+        <div class="hi-badge b2">🧮</div>
+        <h4>Uniqueness &amp; Nonlinear Stability in Full Chemotaxis Models</h4>
+        <p>Rigorous stability analysis for entire solutions in full chemotaxis models with logistic source on bounded heterogeneous environments.</p>
+        <div class="hi-meta">T. B. Issa · Proc. AMS Ser. B, 13 (2026), pp. 44–58</div>
+        <a class="hi-link" href="https://doi.org/10.1090/bproc/277" target="_blank">DOI ↗</a>
+      </div>
+
+      <div class="hi-card rv" style="transition-delay:.16s">
+        <div class="hi-badge b3">🔥</div>
+        <h4>ML-Based Prediction of Extreme Fire Weather Risk</h4>
+        <p>Ensemble machine learning to characterize extreme fire weather risk characteristics across the contiguous United States.</p>
+        <div class="hi-meta">H. R. Seethagari, I. Diallo, T. B. Issa · SJSU RSD21, 2026</div>
+      </div>
+
+      <div class="hi-card rv" style="transition-delay:.08s">
+        <div class="hi-badge b4">🏥</div>
+        <h4>Label-Free Endothelial Cell Mitochondria Segmentation</h4>
+        <p>Holotomographic microscopy combined with UNet for label-free visualization and segmentation of mitochondrial networks.</p>
+        <div class="hi-meta">R. Michael, T. Modirzadeh, T. B. Issa, P. Jurney · Chem. Biomed. Imaging, 2025</div>
+        <a class="hi-link" href="https://pubs.acs.org/doi/10.1021/cbmi.4c00100" target="_blank">DOI ↗</a>
+      </div>
+
+      <div class="hi-card rv" style="transition-delay:.16s">
+        <div class="hi-badge b5">🦠</div>
+        <h4>Two-Strain SIS Epidemic Model in Patchy Environments</h4>
+        <p>Competition-exclusion and coexistence dynamics in a two-strain epidemic model, analyzing long-run persistence across heterogeneous patches.</p>
+        <div class="hi-meta">J. T. Doumaté, T. B. Issa, R. B. Salako · DCDS-B, 29(7), 2024</div>
+        <a class="hi-link" href="https://www.aimsciences.org/article/doi/10.3934/dcdsb.2023213" target="_blank">DOI ↗</a>
+      </div>
+
+      <div class="hi-card rv" style="transition-delay:.24s">
+        <div class="hi-badge b6">🔭</div>
+        <h4>Super-Resolution Fluorescence Microscopy via GANs</h4>
+        <p>Real-world benchmarks for super-resolving fluorescence microscope imagery using Generative Adversarial Networks. Harvard collaboration.</p>
+        <div class="hi-meta">J. Cooper, T. B. Issa, C. Vinegoni, R. Weissleder · IEEE CAI 2024</div>
+        <a class="hi-link" href="https://ieeexplore.ieee.org/document/10605365" target="_blank">IEEE ↗</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PUBLICATIONS ══════════════════════════════════════════ -->
+<section class="sec alt" id="publications">
+  <div class="sec-inner">
+    <div class="sec-label rv">Full List</div>
+    <h2 class="sec-title rv">Publications <span>&amp; Preprints</span></h2>
+
+    <div class="rv">
+      <div class="pub-year">2026</div>
+
+      <div class="pub-row">
+        <div class="pub-n sub">1</div>
+        <div class="pub-body">
+          <div class="pub-ttl">SAW: High Performing Activation Functions for Training Deep Learning Models</div>
+          <div class="pub-auth">S. Mohanty, <strong>T. B. Issa</strong>, M. Masum, D. Uminsky</div>
+          <div class="pub-venue">Submitted — 35th International ACM Conference on Knowledge and Information Management (CIKM 2026)</div>
+          <div class="pub-tags"><span class="pub-tag review">Under Review</span></div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-n">2</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Uniqueness and nonlinear stability of entire solutions in full chemotaxis models with logistic source on bounded heterogeneous environments</div>
+          <div class="pub-auth"><strong>Tahir B. Issa</strong></div>
+          <div class="pub-venue">Proc. Amer. Math. Soc. Ser. B, 13 (2026), pp. 44–58</div>
+          <div class="pub-tags">
+            <a class="pub-tag ams" href="https://doi.org/10.1090/bproc/277" target="_blank">DOI</a>
+            <a class="pub-tag ams" href="https://pubs.ams.org/journals/bproc/2026-13-06/S2330-1511-2026-00277-5" target="_blank">AMS</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-n">3</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Colorectal Cancer Detection using Histopathological Images</div>
+          <div class="pub-auth">N. S. Chilumukuru, S. Sriramulu, <strong>T. B. Issa</strong>, Y. Ezunkpe</div>
+          <div class="pub-venue">2026</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-n">4</div>
+        <div class="pub-body">
+          <div class="pub-ttl">New State-of-the-Art Activation Functions for Training LLMs</div>
+          <div class="pub-auth">S. Mohanty, <strong>T. B. Issa</strong></div>
+          <div class="pub-venue">SJSU RSD21 Poster, 2026</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-n">5</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Machine Learning Based Prediction of Extreme Fire Weather Risk over the Contiguous United States</div>
+          <div class="pub-auth">H. R. Seethagari, I. Diallo, <strong>T. B. Issa</strong></div>
+          <div class="pub-venue">SJSU RSD21 Poster, 2026</div>
+        </div>
+      </div>
+
+      <div class="pub-year">2025</div>
+
+      <div class="pub-row">
+        <div class="pub-n">6</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Label-Free Visualization and Segmentation of Endothelial Cell Mitochondria Using Holotomographic Microscopy and UNet</div>
+          <div class="pub-auth">R. Michael, T. Modirzadeh, <strong>T. B. Issa</strong>, P. Jurney</div>
+          <div class="pub-venue">Chemistry &amp; Biomedical Imaging, 2025</div>
+          <div class="pub-tags"><a class="pub-tag doi" href="https://pubs.acs.org/doi/10.1021/cbmi.4c00100" target="_blank">DOI</a></div>
+        </div>
+      </div>
+
+      <div class="pub-year">2024</div>
+
+      <div class="pub-row">
+        <div class="pub-n">7</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Providing Real-World Benchmarks for Super-Resolving Fluorescence Microscope Imagery Using Generative Adversarial Networks</div>
+          <div class="pub-auth">J. Cooper, <strong>T. B. Issa</strong>, C. Vinegoni, R. Weissleder</div>
+          <div class="pub-venue">2024 IEEE Conference on Artificial Intelligence (CAI), Singapore, pp. 1154–1161</div>
+          <div class="pub-tags"><a class="pub-tag ieee" href="https://ieeexplore.ieee.org/document/10605365" target="_blank">IEEE</a></div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-n">8</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Competition-exclusion and coexistence in a two-strain SIS epidemic model in patchy environments</div>
+          <div class="pub-auth">J. T. Doumaté, <strong>T. B. Issa</strong>, R. B. Salako</div>
+          <div class="pub-venue">Discrete and Continuous Dynamical Systems – Series B, 29(7): 3058–3096, 2024</div>
+          <div class="pub-tags"><a class="pub-tag doi" href="https://www.aimsciences.org/article/doi/10.3934/dcdsb.2023213" target="_blank">DOI</a></div>
+        </div>
+      </div>
+
+      <div class="pub-year">2023</div>
+
+      <div class="pub-row">
+        <div class="pub-n">9</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Using Machine Learning to Model Potential Users with Health Risk Concerns Regarding Microchip Implants</div>
+          <div class="pub-auth">S. Shafeie, M. A. Mohamed, <strong>T. B. Issa</strong>, B. M. Chaudhry</div>
+          <div class="pub-venue">Artificial Intelligence in HCI, HCIII 2023, Copenhagen, Proceedings Part II</div>
+          <div class="pub-tags"><a class="pub-tag doi" href="https://doi.org/10.1007/978-3-031-35894-4_42" target="_blank">DOI</a></div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-n">10</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Deep learning-based numerical solutions and their theoretical stability for parabolic-parabolic chemotaxis models with nonlocal logistic sources</div>
+          <div class="pub-auth"><strong>T. B. Issa</strong>, Y. Ezunkpe</div>
+          <div class="pub-venue">1st International Online Conference on Mathematics and Applications, MDPI, 2023</div>
+          <div class="pub-tags"><a class="pub-tag doi" href="https://doi.org/10.3390/IOCMA2023-14600" target="_blank">DOI</a></div>
+        </div>
+      </div>
+
+      <div class="pub-year">2022</div>
+
+      <div class="pub-row">
+        <div class="pub-n">11</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Protocol Selection of Advanced Imaging Exams using Multi-steps Deep Learning Models</div>
+          <div class="pub-auth">C. Cronister, <strong>T. B. Issa</strong>, D. Uminsky, R. W. Filice</div>
+          <div class="pub-venue">Open Science Index 16, Vol 2, p. 346, 2022</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-n">12</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Protocol Selection of Advanced Imaging Exams using Multi-steps Deep Learning Models</div>
+          <div class="pub-auth">C. Cronister, <strong>T. B. Issa</strong>, D. Uminsky, R. W. Filice</div>
+          <div class="pub-venue">15th IEEE EMBS Regional Conference (CISP-BMEI 2022)</div>
+        </div>
+      </div>
+
+      <div class="pub-year">2021</div>
+
+      <div class="pub-row">
+        <div class="pub-n">13</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Traveling wave solutions for two species competitive chemotaxis systems</div>
+          <div class="pub-auth"><strong>T. B. Issa</strong>, R. B. Salako, W. Shen</div>
+          <div class="pub-venue">Nonlinear Analysis, 212, 2021</div>
+          <div class="pub-tags"><a class="pub-tag doi" href="https://doi.org/10.1016/j.na.2021.112480" target="_blank">DOI</a></div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-n">14</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Toward Automatic Mammography Auditing via Universal Language Model Fine Tuning</div>
+          <div class="pub-auth"><strong>T. B. Issa</strong>, D. Uminsky, A. Shaw, R. Makipour, R. W. Filice</div>
+          <div class="pub-venue">2021 IEEE 22nd International Conference on Information Reuse and Integration (IRI), pp. 215–222</div>
+          <div class="pub-tags"><a class="pub-tag ieee" href="https://doi.org/10.1109/IRI51335.2021.00035" target="_blank">IEEE</a></div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-n">15</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Predicting microcystin occurrence in freshwater lakes and reservoirs: assessing environmental variables</div>
+          <div class="pub-auth">R. P. Buley, H. E. Correia, A. Abebe, <strong>T. B. Issa</strong>, A. E. Wilson</div>
+          <div class="pub-venue">Inland Waters, 11(3), 2021</div>
+        </div>
+      </div>
+
+      <div class="pub-year">2020</div>
+
+      <div class="pub-row">
+        <div class="pub-n">16</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Video-rate acquisition fluorescence microscopy via generative adversarial networks</div>
+          <div class="pub-auth"><strong>T. B. Issa</strong>, C. Vinegoni, A. Shaw, P. F. Feruglio, R. Weissleder, D. Uminsky</div>
+          <div class="pub-venue">IEEE 20th International Conference on Bioinformatics and Bioengineering (BIBE 2020), pp. 569–576</div>
+          <div class="pub-tags"><a class="pub-tag ieee" href="https://doi.org/10.1109/BIBE50027.2020.00098" target="_blank">IEEE</a></div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-n">17</div>
+        <div class="pub-body">
+          <div class="pub-ttl">A hybrid data analytics approach for high-performance concrete compressive strength prediction</div>
+          <div class="pub-auth">S. Simsek, M. Gumus, M. Khalafalla, <strong>T. B. Issa</strong></div>
+          <div class="pub-venue">Journal of Business Analytics, 2020, pp. 1–11</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-n">18</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Pointwise persistence in full chemotaxis models with logistic source on bounded heterogeneous environments</div>
+          <div class="pub-auth"><strong>T. B. Issa</strong>, W. Shen</div>
+          <div class="pub-venue">Journal of Mathematical Analysis and Applications, 490(1), 124204, 2020</div>
+        </div>
+      </div>
+
+      <div class="pub-year">2018 – 2017</div>
+
+      <div class="pub-row">
+        <div class="pub-n">19</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Uniqueness and stability of coexistence states in two species models with/without chemotaxis on bounded heterogeneous environments</div>
+          <div class="pub-auth"><strong>T. B. Issa</strong>, W. Shen</div>
+          <div class="pub-venue">Journal of Dynamics and Differential Equations, 2018</div>
+          <div class="pub-tags"><a class="pub-tag doi" href="https://doi.org/10.1007/s10884-018-9706-7" target="_blank">DOI</a></div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-n">20</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Persistence, coexistence and extinction in two species chemotaxis models on bounded heterogeneous environments</div>
+          <div class="pub-auth"><strong>T. B. Issa</strong>, W. Shen</div>
+          <div class="pub-venue">Journal of Dynamics and Differential Equations, 2018</div>
+          <div class="pub-tags"><a class="pub-tag doi" href="https://doi.org/10.1007/s10884-018-9686-7" target="_blank">DOI</a></div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-n">21</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Dynamics in chemotaxis models of parabolic-elliptic type on bounded domain with time and space dependent logistic sources</div>
+          <div class="pub-auth"><strong>T. B. Issa</strong>, W. Shen</div>
+          <div class="pub-venue">SIAM Journal on Applied Dynamical Systems, 16(2), 926–973, 2017</div>
+        </div>
+      </div>
+
+      <div class="pub-row">
+        <div class="pub-n">22</div>
+        <div class="pub-body">
+          <div class="pub-ttl">Asymptotic dynamics in a two-species chemotaxis model with non-local terms</div>
+          <div class="pub-auth"><strong>T. B. Issa</strong>, R. B. Salako</div>
+          <div class="pub-venue">Discrete and Continuous Dynamical Systems – Series B, 22(5), 3839–3874, 2017</div>
+        </div>
+      </div>
+
+      <div class="prep-box">
+        <div class="prep-label">In Preparation</div>
+        <div class="pub-row" style="border-bottom:none;padding:.5rem 0">
+          <div class="pub-n sub" style="background:var(--gold)">P1</div>
+          <div class="pub-body"><div class="pub-ttl">Dynamics of parabolic-ODE chemotaxis models on unbounded homogeneous and heterogeneous environments</div><div class="pub-auth"><strong>T. B. Issa</strong></div></div>
+        </div>
+        <div class="pub-row" style="border-bottom:none;padding:.5rem 0">
+          <div class="pub-n sub" style="background:var(--gold)">P2</div>
+          <div class="pub-body"><div class="pub-ttl">Colorectal Cancer Detection using Histopathological Images</div><div class="pub-auth">N. S. Chilumukuru, S. Sriramulu, <strong>T. B. Issa</strong>, Y. Ezunkpe</div></div>
+        </div>
+        <div class="pub-row" style="border-bottom:none;padding:.5rem 0">
+          <div class="pub-n sub" style="background:var(--gold)">P3</div>
+          <div class="pub-body"><div class="pub-ttl">New State-of-the-Art Activation Functions for Training LLMs</div><div class="pub-auth">S. Mohanty, <strong>T. B. Issa</strong></div></div>
+        </div>
+        <div class="pub-row" style="border-bottom:none;padding:.5rem 0">
+          <div class="pub-n sub" style="background:var(--gold)">P4</div>
+          <div class="pub-body"><div class="pub-ttl">Machine Learning Based Prediction of Extreme Fire Weather Risk over the Contiguous United States</div><div class="pub-auth">H. R. Seethagari, I. Diallo, <strong>T. B. Issa</strong></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CURRENT WORK ══════════════════════════════════════════ -->
+<section class="sec" id="current">
+  <div class="sec-inner">
+    <div class="sec-label rv">Active Projects</div>
+    <h2 class="sec-title rv">Current <span>Work</span></h2>
+    <div class="tl rv">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2026 – Present</div>
+        <div class="tl-role">SAW Activation Functions for Deep Learning &amp; LLMs</div>
+        <div class="tl-where">with Siddhant Mohanty · SJSU · Submitted CIKM 2026</div>
+        <div class="tl-desc">Developing mathematically grounded activation functions that improve training dynamics and generalization in deep learning models and large language models.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2026 – Present</div>
+        <div class="tl-role">ML-Based Prediction of Extreme Fire Weather Risk</div>
+        <div class="tl-where">with H. R. Seethagari, I. Diallo · VPRI Teaming Award, Co-PI ($25,000)</div>
+        <div class="tl-desc">Ensemble machine learning methods for characterizing extreme fire weather risk across the contiguous United States.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Fall 2024 – Present</div>
+        <div class="tl-role">Anti-Censorship Resistance in the Ethereum Blockchain</div>
+        <div class="tl-where">Ethereum Foundation Grant NK0822-01, Co-PI ($50,000) · CAMCOS, SJSU</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Spring 2024 – Present</div>
+        <div class="tl-role">NVIDIA Deep Learning Institute University Ambassador</div>
+        <div class="tl-where">San José State University</div>
+        <div class="tl-desc">Bringing GPU computing and deep learning curricula to SJSU through NVIDIA's DLI program.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ STUDENTS ═══════════════════════════════════════════════ -->
+<section class="sec alt" id="students">
+  <div class="sec-inner">
+    <div class="sec-label rv">Mentoring</div>
+    <h2 class="sec-title rv">Student <span>Supervision</span></h2>
+    <p class="rv" style="font-size:.9rem;color:var(--t2);margin-bottom:1.4rem;max-width:700px;">At SJSU I mentor graduate and undergraduate students in data science research. During my postdoc at USF (2019–2021), <strong>100% of mentored students secured industry data science positions</strong> upon graduation.</p>
+
+    <h3 class="rv" style="font-family:var(--mono);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem">Current Students · 2026</h3>
+    <div class="stu-grid rv" style="margin-bottom:1.8rem">
+      <div class="stu-card current">
+        <div class="stu-name">Siddhant Mohanty</div>
+        <div class="stu-meta">Graduate Student · SJSU, 2026</div>
+        <div class="stu-topic">New state-of-the-art activation functions for training LLMs — SJSU RSD21 &amp; CIKM 2026</div>
+      </div>
+      <div class="stu-card current">
+        <div class="stu-name">Harshavardhan Reddy Seethagari &amp; Ismaila Diallo</div>
+        <div class="stu-meta">Graduate Students · SJSU, 2026</div>
+        <div class="stu-topic">ML-based prediction of extreme fire weather risk over the contiguous United States — SJSU RSD21</div>
+      </div>
+    </div>
+
+    <h3 class="rv" style="font-family:var(--mono);font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:.8rem">Completed Students</h3>
+    <div class="stu-grid rv">
+      <div class="stu-card">
+        <div class="stu-name">Chun Tam</div>
+        <div class="stu-meta">MSDS · SJSU, 2024–2025</div>
+        <div class="stu-topic">Deep learning for quantification of endothelial cell mitochondrial network structure and dynamics</div>
+      </div>
+      <div class="stu-card">
+        <div class="stu-name">CAMCOS Team (Applied Materials)</div>
+        <div class="stu-meta">Undergraduate/Graduate · SJSU, Spring 2025</div>
+        <div class="stu-topic">Industry collaboration with Applied Materials</div>
+      </div>
+      <div class="stu-card">
+        <div class="stu-name">Xiang Yao</div>
+        <div class="stu-meta">MS Statistics · SJSU, Spring &amp; Fall 2024</div>
+        <div class="stu-topic">Generalized state-of-the-art activation functions for deep learning models training</div>
+      </div>
+      <div class="stu-card">
+        <div class="stu-name">Quoc Luong Huynh</div>
+        <div class="stu-meta">BS Statistics · SJSU, Summer &amp; Fall 2024</div>
+        <div class="stu-topic">Building a state-of-the-art AI-powered Email Replying Assistant App <a href="https://drive.google.com/file/d/1SkDy3MfRBY_xogXoR3G78h6C0DKiakfR/view" target="_blank" style="font-size:.75rem">[Demo]</a></div>
+      </div>
+      <div class="stu-card">
+        <div class="stu-name">John Cooper</div>
+        <div class="stu-meta">MS Statistics · SJSU, 2023 (now Data Scientist)</div>
+        <div class="stu-topic">A perceptual lens for super-resolving video-rate acquisition microscope imagery</div>
+      </div>
+      <div class="stu-card">
+        <div class="stu-name">Steven Rogalsky</div>
+        <div class="stu-meta">MS Statistics · SJSU, Fall 2023 – Spring 2024</div>
+        <div class="stu-topic">Audio classification using deep learning</div>
+      </div>
+      <div class="stu-card">
+        <div class="stu-name">Dat Le &amp; Nicholas Sobrepena</div>
+        <div class="stu-meta">Undergraduate · CAMCOS, SJSU, July 2023</div>
+        <div class="stu-topic">Multidimensional Ethereum Virtual Machine Transaction Modeling <a href="https://hackmd.io/EqqRWOUXRpWsSaG8jJ8qKg" target="_blank" style="font-size:.75rem">[Link]</a></div>
+      </div>
+      <div class="stu-card">
+        <div class="stu-name">C. Cronister</div>
+        <div class="stu-meta">Data Institute · University of San Francisco</div>
+        <div class="stu-topic">Protocol selection of advanced imaging exams using multi-steps deep learning models</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ EDUCATION ══════════════════════════════════════════════ -->
+<section class="sec" id="education">
+  <div class="sec-inner">
+    <div class="sec-label rv">Background</div>
+    <h2 class="sec-title rv">Education <span>&amp; Training</span></h2>
+    <div class="tl rv">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2019 – 2021</div>
+        <div class="tl-role">Postdoctoral Fellow, Data Science</div>
+        <div class="tl-where">The Data Institute, University of San Francisco, CA</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2013 – 2019</div>
+        <div class="tl-role">Ph.D., Mathematics</div>
+        <div class="tl-where">Auburn University, Auburn, AL</div>
+        <div class="tl-desc">Dissertation: <em>Dynamics of Chemotaxis Models in Heterogeneous Environments</em> · Advisor: Prof. Wenxian Shen</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2016 – 2018</div>
+        <div class="tl-role">M.S., Probability and Statistics</div>
+        <div class="tl-where">Auburn University, Auburn, AL · Advisor: Prof. Ashe Abebe</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2012</div>
+        <div class="tl-role">Postgraduate Diploma, Mathematics</div>
+        <div class="tl-where">International Centre for Theoretical Physics (ICTP), Trieste, Italy</div>
+        <div class="tl-desc">Thesis: <em>A Recent Variational Approach to Semilinear Wave Equations</em> · Advisor: Prof. Giovanni Bellettini</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2011</div>
+        <div class="tl-role">M.Sc., Pure and Applied Mathematics</div>
+        <div class="tl-where">African University of Science and Technology, Nigeria</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2010</div>
+        <div class="tl-role">M.Sc., Applied Mathematics and Computer Science</div>
+        <div class="tl-where">Gaston Berger University, Senegal</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2009</div>
+        <div class="tl-role">B.Sc., Applied Mathematics and Computer Science</div>
+        <div class="tl-where">Gaston Berger University, Senegal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TEACHING ═══════════════════════════════════════════════ -->
+<section class="sec alt" id="teaching">
+  <div class="sec-inner">
+    <div class="sec-label rv">Classroom</div>
+    <h2 class="sec-title rv">Teaching <span>Experience</span></h2>
+    <h3 class="rv" style="font-size:.88rem;font-weight:700;color:var(--dk);margin-bottom:.7rem">San José State University (2021 – Present)</h3>
+    <table class="ctable rv" style="margin-bottom:1.8rem">
+      <thead><tr><th>Semester</th><th>Course</th></tr></thead>
+      <tbody>
+        <tr><td>Spring 2026</td><td>Mathematical Data Visualization</td></tr>
+        <tr><td>Spring 2026</td><td>Introduction to Python Programming and SQL</td></tr>
+        <tr><td>Fall 2025</td><td>Statistical and Machine Learning Classification</td></tr>
+        <tr><td>Fall 2024</td><td>Machine Learning for Classification</td></tr>
+        <tr><td>Fall 2024</td><td>Calculus III</td></tr>
+        <tr><td>Spring 2024</td><td>Introduction to Python Programming and SQL</td></tr>
+        <tr><td>Fall 2023</td><td>Machine Learning for Classification</td></tr>
+        <tr><td>Fall 2023</td><td>Probability and Statistics Theory</td></tr>
+        <tr><td>Spring 2023</td><td>Fundamentals of Data Science</td></tr>
+        <tr><td>Fall 2022</td><td>R Programming for Data Analysis</td></tr>
+        <tr><td>Fall 2022</td><td>Applied Probability and Statistics</td></tr>
+        <tr><td>Fall 2021 / Spring 2022</td><td>Probability and Statistics Theory &amp; Applied Probability and Statistics</td></tr>
+      </tbody>
+    </table>
+    <h3 class="rv" style="font-size:.88rem;font-weight:700;color:var(--dk);margin-bottom:.7rem">Auburn University — Graduate Teaching Assistant (2013 – 2019)</h3>
+    <table class="ctable rv">
+      <thead><tr><th>Period</th><th>Course</th></tr></thead>
+      <tbody>
+        <tr><td>Summer 2019</td><td>Statistics for Engineers and Scientists</td></tr>
+        <tr><td>Spring 2018, 2019</td><td>Statistics for Biological and Health Sciences</td></tr>
+        <tr><td>Fall 2018</td><td>Probability and Statistics I</td></tr>
+        <tr><td>Multiple terms</td><td>Differential Equations, Calculus II &amp; III, Linear Algebra</td></tr>
+        <tr><td>Multiple terms</td><td>Pre-calculus (Math 1000, 1120, 1150)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════ AWARDS ═════════════════════════════════════════════════ -->
+<section class="sec" id="awards">
+  <div class="sec-inner">
+    <div class="sec-label rv">Recognition</div>
+    <h2 class="sec-title rv">Awards <span>&amp; Grants</span></h2>
+    <ul class="aw-list rv">
+      <li class="aw-item"><span class="aw-yr">Spring 2024</span><span class="aw-body"><strong>VPRI Teaming Award — $25,000</strong> (Co-PI) · "Multi-Model Ensemble ML for Extreme Fire Weather Risk," SJSU</span></li>
+      <li class="aw-item"><span class="aw-yr">Spring 2024</span><span class="aw-body"><strong>NVIDIA DLI University Ambassadorship</strong> · Officially granted, SJSU</span></li>
+      <li class="aw-item"><span class="aw-yr">Fall 2024</span><span class="aw-body"><strong>Teaching Workshop Award — $10,000</strong> · "Asset-Based Approaches to Teaching and Learning FLC," SJSU</span></li>
+      <li class="aw-item"><span class="aw-yr">Fall 2024</span><span class="aw-body"><strong>Ethereum Foundation Grant — $50,000</strong> (Co-PI, NK0822-01) · "Anti-Censorship Resistance in the Ethereum Blockchain," CAMCOS, SJSU</span></li>
+      <li class="aw-item"><span class="aw-yr">Fall 2023</span><span class="aw-body"><strong>Ethereum Foundation Grant — $25,000</strong> (Co-PI, NB0121-01) · "Multidimensional EIP-1559 and Eigenlayer," CAMCOS, SJSU</span></li>
+      <li class="aw-item"><span class="aw-yr">Jan 2023</span><span class="aw-body"><strong>Student Support Award — $6,400</strong> · San José State University</span></li>
+      <li class="aw-item"><span class="aw-yr">Nov 2020</span><span class="aw-body"><strong>Senior Personnel — $75,000 Grant</strong> · 11th Hour mBio Project (USF, UC Berkeley, UChicago)</span></li>
+      <li class="aw-item"><span class="aw-yr">Aug 2021</span><span class="aw-body"><strong>Woodward Travel Support — $2,500</strong> · 44th SIAM SEAS Conference, Auburn University</span></li>
+      <li class="aw-item"><span class="aw-yr">2019–2021</span><span class="aw-body"><strong>Data Science Postdoctoral Fellowship</strong> · The Data Institute, University of San Francisco</span></li>
+      <li class="aw-item"><span class="aw-yr">2023</span><span class="aw-body"><strong>NSF Statistics Grant Panelist</strong> (P231180) · Main reviewer on 3 grants; panelist for 97 applications</span></li>
+      <li class="aw-item"><span class="aw-yr">2014–2016</span><span class="aw-body"><strong>Don &amp; Sandy Logan Fellowship — $2,000/yr</strong> · Dept. of Mathematics, Auburn University</span></li>
+      <li class="aw-item"><span class="aw-yr">2011–2012</span><span class="aw-body"><strong>Abdus Salam International Centre Scholarship</strong> · ICTP Pre-Ph.D. Program, Trieste, Italy</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════ SKILLS ═════════════════════════════════════════════════ -->
+<section class="sec alt">
+  <div class="sec-inner">
+    <div class="sec-label rv">Toolkit</div>
+    <h2 class="sec-title rv">Skills <span>&amp; Service</span></h2>
+    <div class="rv">
+      <div class="sk-row">
+        <h4>Programming &amp; Tools</h4>
+        <div class="sk-pills">
+          <span class="sk-pill code">Python</span><span class="sk-pill code">PyTorch</span><span class="sk-pill code">FastAI</span>
+          <span class="sk-pill code">R</span><span class="sk-pill code">SQL</span><span class="sk-pill code">Spark</span>
+          <span class="sk-pill code">PySpark</span><span class="sk-pill code">MATLAB</span><span class="sk-pill code">C</span><span class="sk-pill code">C++</span>
+        </div>
+      </div>
+      <div class="sk-row">
+        <h4>Languages</h4>
+        <div class="sk-pills">
+          <span class="sk-pill lang">English</span><span class="sk-pill lang">French</span>
+          <span class="sk-pill lang">Chadian Arabic</span><span class="sk-pill lang">Arabic</span>
+        </div>
+      </div>
+      <div class="sk-row">
+        <h4>Journal Reviewing</h4>
+        <div class="sk-pills">
+          <span class="sk-pill org">Nonlinear Analysis (Elsevier)</span>
+          <span class="sk-pill org">Nonlinearity (IOP/LMS)</span>
+          <span class="sk-pill org">Chaos (AIP)</span>
+          <span class="sk-pill org">Annals of Operations Research</span>
+          <span class="sk-pill org">Electronic Commerce Research</span>
+        </div>
+      </div>
+      <div class="sk-row">
+        <h4>Professional Affiliations</h4>
+        <div class="sk-pills">
+          <span class="sk-pill org">SIAM (2018–present)</span>
+          <span class="sk-pill org">American Mathematical Society (2013–present)</span>
+          <span class="sk-pill org">NVIDIA DLI Ambassador</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CONTACT ════════════════════════════════════════════════ -->
+<section class="sec" id="contact">
+  <div class="sec-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start">
+    <div class="rv">
+      <div class="sec-label">Get in Touch</div>
+      <h2 class="sec-title" style="margin-bottom:1rem">Contact <span>Info</span></h2>
+      <p style="font-size:.9rem;color:var(--t2);margin-bottom:1.4rem">I welcome inquiries from prospective students, collaborators, and colleagues.</p>
+      <div style="font-size:.88rem;color:var(--t2);line-height:2.2">
+        <div>📧 <a href="mailto:tahirbachar.issa@sjsu.edu">tahirbachar.issa@sjsu.edu</a></div>
+        <div>📞 408-924-5146</div>
+        <div>📍 One Washington Square, San José, CA 95192-0103</div>
+        <div>🏛 Dept. of Mathematics &amp; Statistics, SJSU</div>
+      </div>
+      <div style="margin-top:1.2rem;display:flex;gap:.6rem;flex-wrap:wrap">
+        <a class="soc-btn scholar" href="https://scholar.google.com/citations?user=40_VxlQAAAAJ&hl=en" target="_blank">🎓 Google Scholar</a>
+        <a class="soc-btn sjsu" href="https://www.sjsu.edu/math/" target="_blank">🏛 Dept. Website</a>
+        <a class="soc-btn email" href="mailto:tahirbachar.issa@sjsu.edu">✉ Email Me</a>
+      </div>
+    </div>
+    <div class="rv" style="transition-delay:.15s">
+      <div class="sec-label">Location</div>
+      <h2 class="sec-title" style="margin-bottom:1rem">San José <span>State University</span></h2>
+      <div style="background:var(--bga);border-radius:var(--r);padding:1.4rem;border:1px solid var(--bdr);font-size:.85rem;color:var(--t2);line-height:2">
+        <strong style="color:var(--dk);font-family:var(--serif)">Tahir Bachar Issa</strong><br>
+        Assistant Professor of Data Science<br>
+        Department of Mathematics &amp; Statistics<br>
+        San José State University<br>
+        One Washington Square<br>
+        San José, CA 95192-0103
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═════════════════════════════════════════════════ -->
+<footer>
+  <p>© <span id="yr"></span> Tahir Bachar Issa &nbsp;·&nbsp; Department of Mathematics &amp; Statistics, San José State University
+  &nbsp;·&nbsp; <a href="mailto:tahirbachar.issa@sjsu.edu">tahirbachar.issa@sjsu.edu</a></p>
+</footer>
+
+<!-- ═══════════ SCRIPT ════════════════════════════════════════════════ -->
+<script>
+/* year */
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* mobile nav */
+function toggleMob(){
+  document.getElementById('mob-nav').classList.toggle('open');
+}
+
+/* scroll reveal */
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible') });
+},{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+/* neural network canvas */
+const canvas = document.getElementById('neural-canvas');
+const ctx    = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+
+const nodes = Array.from({length:22},()=>({
+  x: 30 + Math.random()*(W-60),
+  y: 20 + Math.random()*(H-40),
+  vx:(Math.random()-.5)*.35,
+  vy:(Math.random()-.5)*.35,
+  r: 3 + Math.random()*3
+}));
+
+const symbols = ['∇','∂','∑','∫','σ','λ','μ','∞','≈','⊕'];
+const labels  = symbols.map(s=>({
+  s, x: 20+Math.random()*(W-40), y: 16+Math.random()*(H-32),
+  a: .08+Math.random()*.12
+}));
+
+let mouse={x:-999,y:-999};
+canvas.addEventListener('mousemove',e=>{
+  const r=canvas.getBoundingClientRect();
+  mouse={x:e.clientX-r.left,y:e.clientY-r.top};
+});
+
+let pulses=[];
+function addPulse(){
+  if(nodes.length<2) return;
+  const a=Math.floor(Math.random()*nodes.length);
+  let b=a;
+  while(b===a) b=Math.floor(Math.random()*nodes.length);
+  pulses.push({a,b,t:0,speed:.018+Math.random()*.012});
+}
+setInterval(addPulse,480);
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+
+  /* symbols */
+  ctx.font='12px IBM Plex Mono, monospace';
+  labels.forEach(l=>{
+    ctx.fillStyle=`rgba(27,58,75,${l.a})`;
+    ctx.fillText(l.s,l.x,l.y);
+  });
+
+  /* edges */
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<110){
+        ctx.strokeStyle=`rgba(41,128,176,${.22*(1-d/110)})`;
+        ctx.lineWidth=.8;
+        ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke();
+      }
+    }
+  }
+
+  /* pulses */
+  pulses=pulses.filter(p=>{
+    const nx=nodes[p.a].x+(nodes[p.b].x-nodes[p.a].x)*p.t;
+    const ny=nodes[p.a].y+(nodes[p.b].y-nodes[p.a].y)*p.t;
+    ctx.beginPath();
+    ctx.arc(nx,ny,3.5,0,Math.PI*2);
+    ctx.fillStyle='rgba(26,138,125,.85)';
+    ctx.fill();
+    p.t+=p.speed;
+    return p.t<1;
+  });
+
+  /* nodes */
+  nodes.forEach(n=>{
+    const dx=n.x-mouse.x, dy=n.y-mouse.y;
+    const glow=Math.sqrt(dx*dx+dy*dy)<60;
+    ctx.beginPath();
+    ctx.arc(n.x,n.y,glow?n.r+2:n.r,0,Math.PI*2);
+    ctx.fillStyle=glow?'rgba(26,138,125,.9)':'rgba(27,58,75,.75)';
+    ctx.fill();
+    if(glow){
+      ctx.shadowBlur=12;ctx.shadowColor='rgba(26,138,125,.5)';
+      ctx.fill();ctx.shadowBlur=0;
+    }
+
+    /* move */
+    n.x+=n.vx; n.y+=n.vy;
+    if(n.x<10||n.x>W-10) n.vx*=-1;
+    if(n.y<10||n.y>H-10) n.vy*=-1;
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+</body>
+</html>
